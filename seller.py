@@ -71,7 +71,7 @@ def update_price(prices: list, client_id: str, seller_token: str) -> dict:
     """Обновить цены товаров.
 
     Args:
-        arg1 (list):
+        arg1 (list): Список с ценами часов
         arg2 (str): Идентификатор клиента
         arg3 (str): Api-ключ
 
