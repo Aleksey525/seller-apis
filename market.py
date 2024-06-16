@@ -222,7 +222,7 @@ async def upload_prices(watch_remnants: list, campaign_id: str, market_token: st
     return prices
 
 
-async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id):
+async def upload_stocks(watch_remnants: list, campaign_id: str, market_token: str, warehouse_id: str) -> tuple:
     """Загрузить остатки.
 
     Args:
