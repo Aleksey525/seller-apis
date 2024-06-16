@@ -10,7 +10,18 @@ from seller import divide, price_conversion
 logger = logging.getLogger(__file__)
 
 
-def get_product_list(page, campaign_id, access_token):
+def get_product_list(page: str, campaign_id: str, access_token: str) -> list:
+    """Получить список товаров Яндекс маркет.
+
+    Args:
+        arg1 (str): Страница с товарами.
+        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        arg3 (str): Api-токен.
+
+    Returns:
+        list: Список с товарами клиента.
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -29,7 +40,18 @@ def get_product_list(page, campaign_id, access_token):
     return response_object.get("result")
 
 
-def update_stocks(stocks, campaign_id, access_token):
+def update_stocks(stocks: list, campaign_id: str, access_token: str) -> dict:
+    """Обновить остатки.
+
+    Args:
+        arg1 (list): Список с остатками часов.
+        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        arg3 (str): Api-токен.
+
+    Returns:
+        dict: Словарь с информацией об остатках.
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -45,7 +67,18 @@ def update_stocks(stocks, campaign_id, access_token):
     return response_object
 
 
-def update_price(prices, campaign_id, access_token):
+def update_price(prices: list, campaign_id: str, access_token: str) -> dict:
+    """Обновить цены товаров.
+
+    Args:
+        arg1 (list): Список с ценами часов
+        arg2 (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
+        arg3 (str): Api-ключ
+
+    Returns:
+        dict: Словарь с информацией об обновленных ценах
+
+    """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -61,8 +94,16 @@ def update_price(prices, campaign_id, access_token):
     return response_object
 
 
-def get_offer_ids(campaign_id, market_token):
-    """Получить артикулы товаров Яндекс маркета"""
+def get_offer_ids(campaign_id: str, market_token: str) -> list:
+    """Получить артикулы товаров Яндекс маркета.
+
+    Args:
+        arg1 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        arg2 (str): Api-токен.
+
+    Returns:
+        list: Список с артикулами часов.
+    """
     page = ""
     product_list = []
     while True:
@@ -77,7 +118,17 @@ def get_offer_ids(campaign_id, market_token):
     return offer_ids
 
 
-def create_stocks(watch_remnants, offer_ids, warehouse_id):
+def create_stocks(watch_remnants: list, offer_ids: list, warehouse_id: str) -> list:
+    """Создать список с остатками товара с SCU идентификаторами.
+
+    Args:
+        arg1 (lst): Список с остатками часов
+        arg2 (str): Список c id часов.
+        arg3 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+
+    Returns:
+        list: Список с остатками часов и их SCU идентификаторами.
+    """
     # Уберем то, что не загружено в market
     stocks = list()
     date = str(datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z")
@@ -122,7 +173,17 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
     return stocks
 
 
-def create_prices(watch_remnants, offer_ids):
+def create_prices(watch_remnants: list, offer_ids: list) -> list:
+    """Создать список с ценами.
+
+    Args:
+        arg1 (list): Список с остатками часов.
+        arg2 (str): Список с артикулами часов.
+
+    Returns:
+        list: Список с ценами часов.
+
+    """
     prices = []
     for watch in watch_remnants:
         if str(watch.get("Код")) in offer_ids:
@@ -142,7 +203,18 @@ def create_prices(watch_remnants, offer_ids):
     return prices
 
 
-async def upload_prices(watch_remnants, campaign_id, market_token):
+async def upload_prices(watch_remnants: list, campaign_id: str, market_token: str) -> list:
+    """Загрузить цены.
+
+    Args:
+        arg1: (lst): Список с остатками часов.
+        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        arg3 (str): Api-токен.
+
+    Returns:
+        list: Список с ценами часов.
+
+    """
     offer_ids = get_offer_ids(campaign_id, market_token)
     prices = create_prices(watch_remnants, offer_ids)
     for some_prices in list(divide(prices, 500)):
@@ -151,6 +223,18 @@ async def upload_prices(watch_remnants, campaign_id, market_token):
 
 
 async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id):
+    """Загрузить остатки.
+
+    Args:
+        arg1: (lst): Список с остатками часов.
+        arg2 (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
+        arg3 (str): Api-ключ.
+        arg4 (str): Идентификатор склада клиента для модели работы с Яндекс маркетом.
+
+    Returns:
+        tuple: остатки часов.
+
+    """
     offer_ids = get_offer_ids(campaign_id, market_token)
     stocks = create_stocks(watch_remnants, offer_ids, warehouse_id)
     for some_stock in list(divide(stocks, 2000)):
