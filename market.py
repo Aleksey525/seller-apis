@@ -14,9 +14,9 @@ def get_product_list(page: str, campaign_id: str, access_token: str) -> list:
     """Получить список товаров Яндекс маркет.
 
     Args:
-        arg1 (str): Страница с товарами.
-        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
-        arg3 (str): Api-токен.
+        page (str): Страница с товарами.
+        campaign_id (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        access_token (str): Api-токен.
 
     Returns:
         list: Список с товарами клиента.
@@ -44,9 +44,9 @@ def update_stocks(stocks: list, campaign_id: str, access_token: str) -> dict:
     """Обновить остатки.
 
     Args:
-        arg1 (list): Список с остатками часов.
-        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
-        arg3 (str): Api-токен.
+        stocks (list): Список с остатками часов.
+        campaign_id (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        access_token (str): Api-токен.
 
     Returns:
         dict: Словарь с информацией об остатках.
@@ -71,9 +71,9 @@ def update_price(prices: list, campaign_id: str, access_token: str) -> dict:
     """Обновить цены товаров.
 
     Args:
-        arg1 (list): Список с ценами часов
-        arg2 (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
-        arg3 (str): Api-ключ
+        prices (list): Список с ценами часов
+        campaign_id (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
+        access_token (str): Api-ключ
 
     Returns:
         dict: Словарь с информацией об обновленных ценах
@@ -98,8 +98,8 @@ def get_offer_ids(campaign_id: str, market_token: str) -> list:
     """Получить артикулы товаров Яндекс маркета.
 
     Args:
-        arg1 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
-        arg2 (str): Api-токен.
+        campaign_id (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        market_token (str): Api-токен.
 
     Returns:
         list: Список с артикулами часов.
@@ -122,9 +122,9 @@ def create_stocks(watch_remnants: list, offer_ids: list, warehouse_id: str) -> l
     """Создать список с остатками товара с SCU идентификаторами.
 
     Args:
-        arg1 (lst): Список с остатками часов
-        arg2 (str): Список c id часов.
-        arg3 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        watch_remnants (lst): Список с остатками часов
+        offer_ids (str): Список c id часов.
+        warehouse_id (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
 
     Returns:
         list: Список с остатками часов и их SCU идентификаторами.
@@ -177,8 +177,8 @@ def create_prices(watch_remnants: list, offer_ids: list) -> list:
     """Создать список с ценами.
 
     Args:
-        arg1 (list): Список с остатками часов.
-        arg2 (str): Список с артикулами часов.
+        watch_remnants (list): Список с остатками часов.
+        offer_ids (str): Список с артикулами часов.
 
     Returns:
         list: Список с ценами часов.
@@ -207,9 +207,9 @@ async def upload_prices(watch_remnants: list, campaign_id: str, market_token: st
     """Загрузить цены.
 
     Args:
-        arg1: (lst): Список с остатками часов.
-        arg2 (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
-        arg3 (str): Api-токен.
+        watch_remnants (lst): Список с остатками часов.
+        campaign_id (str): Идентификатор компании или склада клиента для модели работы с Яндекс маркетом.
+        market_token (str): Api-токен.
 
     Returns:
         list: Список с ценами часов.
@@ -226,10 +226,10 @@ async def upload_stocks(watch_remnants: list, campaign_id: str, market_token: st
     """Загрузить остатки.
 
     Args:
-        arg1: (lst): Список с остатками часов.
-        arg2 (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
-        arg3 (str): Api-ключ.
-        arg4 (str): Идентификатор склада клиента для модели работы с Яндекс маркетом.
+        watch_remnants (lst): Список с остатками часов.
+        campaign_id (str): Идентификатор компании клиента для модели работы с Яндекс маркетом.
+        market_token (str): Api-ключ.
+        warehouse_id (str): Идентификатор склада клиента для модели работы с Яндекс маркетом.
 
     Returns:
         tuple: остатки часов.

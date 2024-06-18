@@ -15,9 +15,9 @@ def get_product_list(last_id: str, client_id: str, seller_token: str) -> list:
     """Получить список товаров магазина озон.
 
     Args:
-        arg1 (str): Идентификатор последнего значения на странице.
-        arg2 (str): Идентификатор клиента.
-        arg3 (str): Api-ключ.
+        last_id (str): Идентификатор последнего значения на странице.
+        client_id (str): Идентификатор клиента.
+        seller_token (str): Api-ключ.
 
     Returns:
         list: Список с товарами продавца.
@@ -45,8 +45,8 @@ def get_offer_ids(client_id: str, seller_token: str) -> list:
     """Получить артикулы товаров магазина озон.
 
     Args:
-        arg1 (str): Идентификатор клиента.
-        arg2 (str): Api-ключ.
+        client_id (str): Идентификатор клиента.
+        seller_token (str): Api-ключ.
 
     Returns:
         list: Список с артикулами товаров.
@@ -71,9 +71,9 @@ def update_price(prices: list, client_id: str, seller_token: str) -> dict:
     """Обновить цены товаров.
 
     Args:
-        arg1 (list): Список с ценами часов
-        arg2 (str): Идентификатор клиента
-        arg3 (str): Api-ключ
+        prices (list): Список с ценами часов
+        client_id (str): Идентификатор клиента
+        seller_token (str): Api-ключ
 
     Returns:
         dict: Словарь с информацией о ценах
@@ -94,9 +94,9 @@ def update_stocks(stocks: list, client_id: str, seller_token: str) -> dict:
     """Обновить остатки.
 
     Args:
-        arg1 (list): Список с ценами.
-        arg2 (str): Идентификатор клиента.
-        arg3 (str): Api-ключ.
+        stocks (list): Список с ценами.
+        client_id (str): Идентификатор клиента.
+        seller_token (str): Api-ключ.
 
     Returns:
         dict: Словарь с информацией об остатках.
@@ -143,8 +143,8 @@ def create_stocks(watch_remnants: list, offer_ids: list) -> list:
     """Создать список с остатками часов и их id.
 
     Args:
-        arg1 (list): Список с остатками часов.
-        arg2 (str): Идентификатор клиента.
+        watch_remnants (list): Список с остатками часов.
+        offer_ids (str): Идентификатор клиента.
 
     Returns:
         list: Список с остатками часов и их id.
@@ -173,8 +173,8 @@ def create_prices(watch_remnants: list, offer_ids: list) -> list:
     """Создать список с ценами.
 
     Args:
-        arg1 (list): Список с остатками часов.
-        arg2 (str): Идентификатор клиента.
+        watch_remnants (list): Список с остатками часов.
+        offer_ids (str): Идентификатор клиента.
 
     Returns:
         list: Список с ценами часов.
@@ -198,7 +198,7 @@ def price_conversion(price: str) -> str:
     """Преобразовать цену. Пример: 5'990.00 руб. -> 5990.
 
     Args:
-        arg: (str): Цена в исходном виде.
+        price (str): Цена в исходном виде.
 
     Returns:
         str: Цена в преобразованном виде.
@@ -220,8 +220,8 @@ def divide(lst: list, n: int):
     """Разделить список lst на части по n элементов.
 
     Args:
-        arg1: (lst): Список с остатками.
-        arg2: (int): Количество элементов.
+        lst (list): Список с остатками.
+        n (int): Количество элементов.
 
     Yields:
         list: Часть разделенного списка.
@@ -235,9 +235,9 @@ async def upload_prices(watch_remnants: list, client_id: str, seller_token: str)
     """Загрузить цены.
 
     Args:
-        arg1: (lst): Список с остатками.
-        arg2 (str): Идентификатор клиента.
-        arg3 (str): Api-ключ.
+        watch_remnants (lst): Список с остатками.
+        client_id (str): Идентификатор клиента.
+        seller_token (str): Api-ключ.
 
     Returns:
         list: Список с ценами часов.
@@ -254,9 +254,9 @@ async def upload_stocks(watch_remnants: list, client_id: str, seller_token: str)
     """Загрузить остатки.
 
     Args:
-        arg1: (lst): Список с остатками.
-        arg2 (str): Идентификатор клиента.
-        arg3 (str): Api-ключ.
+        watch_remnants (lst): Список с остатками.
+        client_id (str): Идентификатор клиента.
+        seller_token (str): Api-ключ.
 
     Returns:
         tuple: остатки часов.
